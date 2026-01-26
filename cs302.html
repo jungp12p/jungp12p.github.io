@@ -23,15 +23,15 @@
             carry-out (C0). That carry is then passed into the full adder, which computes the most significant bit using inputs X1, Y1, 
             and C0.
             <br><br>
-            For X = 01 and Y = 10, the half adder receives X0 = 1 and Y0 = 0, producing S0 = 1 and C0 = 0. The full adder then receives 
-            X1 = 0, Y1 = 1, and C0 = 0, producing S1 = 1 and C1 = 0. The resulting sum bits are S1S0 = 11 with carry C1 = 0, yielding 
-            the binary result 011, which correctly represents the decimal value 3.
+            For X = 11 and Y = 11, the half adder receives X0 = 1 and Y0 = 1, producing S0 = 0 and C0 = 1. The full adder then receives 
+            X1 = 1, Y1 = 1, and C0 = 1, producing S1 = 1 and C1 = 1. The resulting sum bits are S1S0 = 10 with carry C1 = 1, yielding 
+            the binary result 110, which correctly represents the decimal value 6.
         </p>
 
 
 
         <h2>2-Bit Subtraction Circuit</h2>
-        
+
         <img src="img/digilogic/2bit-sub.png" alt="Block diagram of a 2-bit subtraction circuit utilizing half subtractor 
         and full subtractor components connected to perform binary subtraction of two 2-bit numbers" style="max-width: 100%; height: auto;">
        <p><strong>Justification:</strong>
