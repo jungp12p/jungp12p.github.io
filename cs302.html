@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS302: Digital Logic x Metaphysics | Paul Jung</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container" style="padding: 50px;">
+        <h1>CS302: Digital Logic x Metaphysics</h1>
+        <p>This project explores the intersection of digital logic circuits and philosophical questions about the nature of computers.</p>
+
+        <h2>2-Bit Addition Circuit</h2>
+        <img src="img/digilogic/2bit-calc.png" alt="Block diagram of a 2-bit addition circuit showing half adder and 
+        full adder components connected to perform binary addition of two 2-bit numbers" style="max-width: 100%; height: auto;">
+        <p><strong>Justification:</strong>
+            This 2-bit addition circuit is constructed by combining a half adder and a full adder to correctly handle carry propagation 
+            between bits. The half adder computes the least significant bit using inputs X0 and Y0, producing a sum bit (S0) and a 
+            carry-out (C0). That carry is then passed into the full adder, which computes the most significant bit using inputs X1, Y1, 
+            and C0.
+            <br><br>
+            For X = 01 and Y = 10, the half adder receives X0 = 1 and Y0 = 0, 
+            producing S0 = 1 and C0 = 0. The full adder then receives X1 = 0, Y1 = 1, and C0 = 0, producing S1 = 1 and C1 = 0. 
+            The resulting sum is 011, which correctly represents the decimal value 3. This structure mirrors how larger arithmetic 
+            circuits scale by managing local computation and carry propagation.
+        </p>
+
+
+        <h2>2-Bit Subtraction Circuit</h2>
+        <img src="img/digilogic/2bit-sub.png" alt="Block diagram of a 2-bit subtraction circuit utilizing half subtractor 
+        and full subtractor components connected to perform binary subtraction of two 2-bit numbers" style="max-width: 100%; height: auto;">
+       <p><strong>Justification:</strong>
+            The 2-bit subtraction circuit uses a half subtractor for the least significant bit and a full subtractor for the most 
+            significant bit in order to correctly handle borrowing across bits. The half subtractor computes the initial difference (D0) 
+            and borrow (B0) from inputs X0 and Y0. This borrow is then passed into the full subtractor, 
+            which computes the most significant difference bit using inputs X1, Y1, and B0.
+            <br><br>
+            Tracing the inputs X = 10 and Y = 01 illustrates the circuit’s behavior. The half subtractor receives X0 = 0 and Y0 = 1, 
+            producing D0 = 1 and B0 = 1, indicating that a borrow is required. The full subtractor then receives 
+            X1 = 1, Y1 = 0, and B0 = 1, producing D1 = 0 with no remaining borrow. The final difference is 01, 
+            which correctly represents the decimal value 1. This design demonstrates how subtraction requires explicit 
+            management of dependency between bits.
+        </p>
+
+
+
+        <h2>Reflections on the Nature and Structure of Computers</h2>
+
+        <p>
+            Our in-class discussions significantly reshaped how I think about what computers are and what they are for. 
+            One of the most thought-provoking questions raised in class was: <em>Does a computer have to be useful, or even usable, 
+                by humans?</em> This question stood out to me because it challenges an assumption I had always taken for granted—that 
+                usefulness is synonymous with productivity, efficiency, or problem-solving in a human-centered sense.
+        </p>
+
+        <p>
+            The discussion of unconventional computing systems, particularly the “crab computer,” pushed this idea further. 
+            The crab computer performs computation through physical interactions rather than symbolic logic, 
+            making it difficult to describe its usefulness in traditional terms. Yet, it still computes. 
+            This made me reconsider whether usefulness is an inherent property of a computer or something humans impose after the fact. 
+            If a system processes information according to rules, does it need a clear purpose to count as computation?
+        </p>
+
+        <p>
+            This question became even more concrete when we discussed the real-life Tamagotchi. 
+            Is a Tamagotchi useful? It does not optimize tasks or produce outputs in a conventional sense, 
+            but it teaches responsibility, care, and attentiveness through sustained interaction. 
+            Its value comes not from what it accomplishes, but from the relationship it creates with the user over time. 
+            In this way, the Tamagotchi suggests that computers can be useful by fostering emotional engagement rather than 
+            performing labor. The device even reverses the typical human–computer relationship: instead of serving the user, 
+            the user must serve the device. This inversion complicates the idea that technology exists solely as a tool and 
+            raises deeper questions about whether usefulness must always be defined in human-centric or instrumental terms.
+        </p>
+
+
+        <br>
+        <a href="projects.html" class="btn">Back to Projects</a>
+    </div>
+
+</body>
+</html></content>
+<parameter name="filePath">/home/paulj/jungp12p.github.io/cs302.html
