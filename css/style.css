@@ -1123,3 +1123,34 @@ a:focus {
         padding: 0 5px;
     }
 }
+
+.project-card {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    flex-wrap: wrap;
+}
+
+.project-image {
+    width: 300px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.project-content {
+    flex: 1;
+}
+
+.project-content h2 {
+    margin-top: 0;
+}
+
+.project-content p {
+    line-height: 1.6;
+}
