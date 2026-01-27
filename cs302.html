@@ -35,16 +35,17 @@
         <img src="img/digilogic/2bit-sub.png" alt="Block diagram of a 2-bit subtraction circuit utilizing half subtractor 
         and full subtractor components connected to perform binary subtraction of two 2-bit numbers" style="max-width: 100%; height: auto;">
        <p><strong>Justification:</strong>
-            The 2-bit subtraction circuit uses a half subtractor for the least significant bit and a full subtractor for the most 
-            significant bit in order to correctly handle borrowing across bits. The half subtractor computes the initial difference (D0) 
-            and borrow (B0) from inputs X0 and Y0. This borrow is then passed into the full subtractor, 
-            which computes the most significant difference bit using inputs X1, Y1, and B0.
+                The 2-bit subtraction circuit uses a half subtractor for the least significant bit and a full subtractor for the most 
+                significant bit in order to correctly handle borrowing across bits. The half subtractor computes the initial difference (D0) 
+                and borrow (B0) from inputs X0 and Y0. This borrow is then passed into the full subtractor, 
+                which computes the most significant difference bit using inputs X1, Y1, and B0.
             <br><br>
-            Tracing the inputs X = 10 and Y = 01 illustrates the circuit’s behavior. The half subtractor receives X0 = 0 and Y0 = 1, 
-            producing D0 = 1 and B0 = 1, indicating that a borrow is required. The full subtractor then receives 
-            X1 = 1, Y1 = 0, and B0 = 1, producing D1 = 0 with no remaining borrow. The final difference is 01, 
-            which correctly represents the decimal value 1. This design demonstrates how subtraction requires explicit 
-            management of dependency between bits.
+            <p>
+                Tracing the inputs X = 11 and Y = 11 illustrates the circuit’s behavior. The half subtractor receives X0 = 1 and Y0 = 1, 
+                producing D0 = 0 and B0 = 0, as no borrow is required. The full subtractor then receives X1 = 1, Y1 = 1, and B0 = 0, 
+                producing D1 = 0 with no remaining borrow. The final difference is 00, which correctly represents the decimal value 0. 
+        </p>
+
         </p>
 
 
