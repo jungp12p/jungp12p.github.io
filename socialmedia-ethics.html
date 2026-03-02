@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Media x Ethics | Paul Jung</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container" style="padding: 50px;">
+        <h1>Social Media x Ethics</h1>
+        <p>This project explores the intersection of social media and ethical design through a Bluesky bot, showcasing different types of posts and interactions.</p>
+
+        <h2>The Anthony Edwards Fanpage Bot</h2>
+        <p>
+            Visit the bot on Bluesky: <a href="https://bsky.app/profile/antmanlover8.bsky.social" target="_blank">@antmanlover8.bsky.social</a>
+        </p>
+        <p><strong>Design Rationale:</strong>
+            I chose to create an Anthony Edwards fanpage because I am a huge fan of his basketball talent. I believe more people should be exposed to his greatness 
+            in the NBA and realize that he isn't too far from becoming the future face of the league. This bot serves as a testament to his skills and potential while 
+            exploring the technical capabilities of social media APIs.
+        </p>
+
+        <h2>1. Text-Only Posts</h2>
+
+        <img src="img/socialmedia/replyPost.png"
+            alt="Bluesky post screenshot showing a text-only reply to another user's post about Anthony Edwards, demonstrating basic text interaction on the platform"
+            style="max-width: 100%; height: auto;">
+
+        <p><strong>Implementation:</strong>
+            Text-only posts are the most straightforward interaction with Bluesky. The bot uses the ATProto library to send simple text messages directly to the platform. 
+            Each post is packaged and communicated with Bluesky's servers to publish immediately. This allows for quick, real-time engagement with the community.
+        </p>
+
+        <p><strong>Design Choice:</strong>
+            Text-only posts form the foundation of the bot's interactions. By starting with simple text replies, the bot can engage with other users' posts about Anthony Edwards, 
+            creating conversational moments and community participation. This approach prioritizes accessibility and authenticity over visual complexity.
+        </p>
+
+        <h2>2. Multimedia Posts</h2>
+
+        <img src="img/socialmedia/picturePost.png"
+            alt="Bluesky post screenshot showing an image of Anthony Edwards with accompanying text caption, demonstrating image upload and embedding functionality"
+            style="max-width: 100%; height: auto;">
+
+        <p><strong>Implementation:</strong>
+            Multimedia posts handle image uploads by first reading image files as binary data and uploading them as blobs to Bluesky. The bot then embeds these images 
+            in posts alongside text captions. This process combines image assets with text to create richer, more visually engaging content that highlights Anthony Edwards' 
+            athletic achievements and moments.
+        </p>
+
+        <p><strong>Design Choice:</strong>
+            Visual content is more engaging and memorable than text alone. By incorporating high-quality images of Anthony Edwards, the bot can showcase his talent more 
+            effectively and attract greater attention from basketball fans. Images also make posts more shareable and likely to appear in users' feeds.
+        </p>
+
+        <h2>3. User Interactions & External Packages</h2>
+
+        <img src="img/socialmedia/genaiPost.png"
+            alt="Bluesky post screenshot showing an AI-generated message praising Anthony Edwards, created using Google Gemini API integration"
+            style="max-width: 100%; height: auto;">
+
+        <p><strong>Implementation:</strong>
+            This section showcases the integration of Google Gemini AI (external package) with Bluesky. The bot sends prompts to the Gemini API, which generates creative, 
+            AI-crafted messages that praise Anthony Edwards' skills and potential. These AI-generated responses are then posted to Bluesky, combining user interaction triggers 
+            with external AI capabilities to create dynamic, personalized content.
+        </p>
+
+        <p><strong>Design Choice:</strong>
+            Integrating generative AI adds sophistication and uniqueness to the bot's posts. Rather than relying solely on pre-written templates, the AI can generate varied, 
+            contextually appropriate messages about Anthony Edwards. This approach raises interesting ethical questions about authenticity and AI-generated content on social 
+            media while demonstrating the potential for human-AI collaboration in creative expression.
+        </p>
+
+        <h2>Ethical Considerations</h2>
+        <p>
+            This project explores several ethical dimensions of social media bots:
+        </p>
+        <ul>
+            <li><strong>Transparency:</strong> Bots should be identified as automated accounts to maintain trust with users who interact with them.</li>
+            <li><strong>Authenticity:</strong> While AI-generated content is powerful, the line between genuine engagement and algorithmic manipulation is important to consider.</li>
+            <li><strong>Purpose:</strong> Using bots for fan engagement and community building differs ethically from bots designed to spread misinformation.</li>
+            <li><strong>Responsibility:</strong> Creators of social media content—human or automated—bear responsibility for the impact of their posts.</li>
+        </ul>
+
+        <br>
+        <a href="cs302.html" class="btn">Back to CS302</a>
+    </div>
+
+</body>
+</html>
