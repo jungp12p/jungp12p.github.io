@@ -2,182 +2,113 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Blockchain x Metaphysics | Paul Jung</title>
-	<link rel="stylesheet" href="../../css/style.css">
+	<link href="../../css/style.css" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="scheme-page">
+	<div class="page">
+		<nav class="top-nav">
+			<a href="cs302.html">Back to CS302 Projects</a>
+		</nav>
 
-	<div class="container" style="padding: 50px;">
-		<h1>Blockchain x Metaphysics</h1>
-		<p>
-			This project explores blockchain construction and system behavior through an interactive demo where users can
-			create nodes, submit transactions, mine blocks, and inspect the UTXO pool.
-		</p>
+		<header class="hero">
+			<p class="eyebrow">CS302 Project</p>
+			<h1>Blockchain x Metaphysics</h1>
+			<p class="subtitle">
+				This project combines a hands-on blockchain simulation with metaphysical questions about
+				existence, ownership, value, and the social foundations of digital reality.
+			</p>
+			<div class="pill-row">
+				<span class="pill">Proof of Work</span>
+				<span class="pill">UTXO Model</span>
+				<span class="pill">Mining Difficulty</span>
+				<span class="pill">CryptoJS</span>
+				<span class="pill">Ontology</span>
+			</div>
+		</header>
 
-		<h2>What is Blockchain?</h2>
-		<p>
-			A blockchain is a distributed, ledger made up of a chain of cryptographically linked blocks.
-			Each block contains a set of transactions, the cryptographic hash of the previous block, a nonce, and the
-			public key of the miner who produced it. To add a new block, a miner must perform <strong>proof-of-work</strong>:
-			repeatedly hashing the block's contents with different nonces until the resulting hash starts or ends with enough
-			zeros to satisfy the current difficulty target. Because every block references its parent's hash,
-			tampering with any block invalidates every block that follows it, making the chain tamper-evident by design.
-			Ownership of funds is tracked through a <strong>UTXO (Unspent Transaction Output)</strong> pool — every
-			spend consumes prior outputs and produces new ones, so the ledger always reflects a consistent set of
-			spendable balances without any central authority, making the blockchain decentralized.
-		</p>
+		<section class="section">
+			<h2>What is Blockchain?</h2>
+			<p>A blockchain is a distributed ledger made up of a chain of cryptographically linked blocks. Each block contains a set of transactions, the cryptographic hash of the previous block, a nonce, and the public key of the miner who produced it. To add a new block, a miner must perform <strong>proof-of-work</strong>: repeatedly hashing the block's contents with different nonces until the resulting hash starts or ends with enough zeros to satisfy the current difficulty target. Because every block references its parent's hash, tampering with any block invalidates every block that follows it, making the chain tamper-evident by design. Ownership of funds is tracked through a <strong>UTXO (Unspent Transaction Output)</strong> pool. Every spend consumes prior outputs and produces new ones, so the ledger always reflects a consistent set of spendable balances without any central authority, making the blockchain decentralized.</p>
+		</section>
 
-		<h2>Demo Video</h2>
-		<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-bottom: 20px;"
-			 aria-label="Video walkthrough of the blockchain demo showing node creation, transaction submission, proof-of-work mining, and UTXO balance updates">
-			<iframe
-				src="https://www.youtube.com/embed/vU4BL82mE3Q"
-				title="Blockchain Demo Walkthrough — node creation, transactions, proof-of-work mining, and UTXO updates"
-				style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-				allowfullscreen
-				loading="lazy">
-			</iframe>
-		</div>
+		<section class="section">
+			<h2>Demo Video</h2>
+			<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; border: 1px solid #e5d6be;" aria-label="Video walkthrough of the blockchain demo showing node creation, transaction submission, proof-of-work mining, and UTXO balance updates">
+				<iframe
+					src="https://www.youtube.com/embed/vU4BL82mE3Q"
+					title="Blockchain Demo Walkthrough - node creation, transactions, proof-of-work mining, and UTXO updates"
+					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+					allowfullscreen
+					loading="lazy">
+				</iframe>
+			</div>
+		</section>
 
-		<h2>Project Materials</h2>
-		<p>
-			Demo repository: <a href="https://github.com/jungp12p/blockchainDemo" target="_blank">https://github.com/jungp12p/blockchainDemo</a><br>
-			Forked from: <a href="https://github.com/nambrot/blockchain-in-js" target="_blank">https://github.com/nambrot/blockchain-in-js</a>
-		</p>
+		<section class="section">
+			<h2>Project Materials</h2>
+			<p>Demo repository: <a href="https://github.com/jungp12p/blockchainDemo" target="_blank" rel="noopener noreferrer">github.com/jungp12p/blockchainDemo</a><br>Forked from: <a href="https://github.com/nambrot/blockchain-in-js" target="_blank" rel="noopener noreferrer">github.com/nambrot/blockchain-in-js</a></p>
+			<h3>Added Features</h3>
+			<ul>
+				<li>Implemented selectable hash functions for mining experiments.</li>
+				<li>Integrated the CryptoJS library for cryptographic hashing and signature support.</li>
+				<li>Added configurable mining difficulty to tune proof-of-work behavior.</li>
+				<li>Added individual node customization (node setup and transaction controls).</li>
+				<li>Enabled any node to mine blocks and receive mining rewards.</li>
+			</ul>
+		</section>
 
-		<p><strong>Added Features:</strong></p>
-		<ul>
-			<li>Implemented selectable hash functions for mining experiments.</li>
-			<li>Integrated the CryptoJS library for cryptographic hashing and signature support.</li>
-			<li>Added configurable mining difficulty to tune proof-of-work behavior.</li>
-			<li>Added individual node customization (node setup and transaction controls).</li>
-			<li>Enabled any node to mine blocks and receive mining rewards.</li>
-		</ul>
+		<section class="section">
+			<h2>Main Interface and Network Controls</h2>
+			<img src="../../img/blockchain/main.png" alt="Main blockchain demo interface showing nodes, configurable amounts, mining difficulty, hash algorithm selection, and UTXO pool visibility" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;">
+			<p><strong>Implementation:</strong> The main screen serves as the control center for the full blockchain simulation. Users can create nodes, set transaction amounts, change mining difficulty, choose hashing algorithms, and inspect balances through the UTXO pool. This layout makes it easy to see how parameter changes affect mining effort, block validity, and account state across the network.</p>
+		</section>
 
-		<h2>Main Interface and Network Controls</h2>
+		<section class="section">
+			<h2>Block Structure and Mining Inputs</h2>
+			<img src="../../img/blockchain/block.png" alt="Detailed block view showing previous hash, miner public key, hash of transactions, nonce, and resulting block hash" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;">
+			<p><strong>Implementation:</strong> Each block includes the parent hash, miner public key, transaction hash bundle, nonce, and final result hash. During proof-of-work, the nonce changes repeatedly until the resulting hash satisfies the selected difficulty target. Exposing these fields in the UI helps demonstrate exactly what data is secured by hashing and how chain integrity is preserved.</p>
+		</section>
 
-		<img src="../../img/blockchain/main.png"
-			alt="Main blockchain demo interface showing nodes, configurable amounts, mining difficulty, hash algorithm selection, and UTXO pool visibility"
-			style="max-width: 100%; height: auto;">
+		<section class="section">
+			<h2>Transaction Creation and Signature Flow</h2>
+			<img src="../../img/blockchain/transaction.png" alt="Transaction creation panel where sender, receiver, and transfer amount are configured" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;">
+			<p><strong>Implementation:</strong> Transaction creation allows users to specify sender, receiver, and transfer amount. Transactions are then signed with the sender's private key so the network can verify authenticity. This enforces ownership of funds and prevents unauthorized spends before transactions are accepted into a mined block.</p>
+		</section>
 
-		<p><strong>Implementation:</strong>
-			The main screen serves as the control center for the full blockchain simulation. Users can create nodes, set transaction
-			amounts, change mining difficulty, choose hashing algorithms, and inspect balances through the UTXO pool. This layout makes
-			it easy to see how parameter changes affect mining effort, block validity, and account state across the network.
-		</p>
+		<section class="section">
+			<h2>Mined Block and Updated UTXO State</h2>
+			<img src="../../img/blockchain/newBlock.png" alt="View showing a newly mined block appended to the chain" style="max-width: 100%; height: auto; margin-bottom: 16px; border-radius: 12px; border: 1px solid #e5d6be;">
+			<img src="../../img/blockchain/UTXO.png" alt="UTXO pool view showing updated balances for each node after mining and transactions" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;">
+			<p><strong>Implementation:</strong> Once a valid block is mined, it is appended to the chain and the UTXO pool is recalculated. The miner receives a reward, and all node balances update according to confirmed transactions. This gives a clear visual model of how consensus, incentives, and spendable outputs interact in a UTXO-based blockchain.</p>
+		</section>
 
-		<h2>Block Structure and Mining Inputs</h2>
+		<section class="section">
+			<h2>Reflection on Metaphysics of Cryptocurrency and Blockchain</h2>
+			<h3>What is Metaphysics?</h3>
+			<p>Metaphysics is the philosophical study of the fundamental nature of reality. It asks questions such as: What is true? What is identity? What does it mean for something to exist? Blockchain and cryptocurrency are especially interesting in metaphysics because they challenge our everyday assumptions about ownership, material objects, and social reality.</p>
+			<p>Owning cryptocurrency does not mean owning a physical object. There is no coin to hold and no central bank to withdraw from. In practice, a person is considered to own a coin because the blockchain network recognizes ledger records that assign spendable outputs to that person. Ownership is therefore established through cryptographic proof, network consensus, and shared acceptance of protocol rules.</p>
 
-		<img src="../../img/blockchain/block.png"
-			alt="Detailed block view showing previous hash, miner public key, hash of transactions, nonce, and resulting block hash"
-			style="max-width: 100%; height: auto;">
+			<h3>Ontology and Existence in Bitcoin</h3>
+			<p>Our second branch of philosophy was <strong>Ontology</strong>, a branch of metaphysics focused specifically on existence. Ontology asks: What makes something a thing rather than nothing? What conditions must be met for something to exist?</p>
+			<p>Normally, we think of existence in terms of physical objects. Bitcoin complicates that idea because its state is not physical. Instead, Bitcoin exists as entries in a distributed digital ledger secured by cryptographic proofs. Its existence is both mathematical and social: participants follow the same protocol rules and collectively treat ledger entries as valid ownership and transferable value.</p>
 
-		<p><strong>Implementation:</strong>
-			Each block includes the parent hash, miner public key, transaction hash bundle, nonce, and final result hash.
-			During proof-of-work, the nonce changes repeatedly until the resulting hash satisfies the selected difficulty target.
-			Exposing these fields in the UI helps demonstrate exactly what data is secured by hashing and how chain integrity is preserved.
-		</p>
+			<h3>Discussion Question 1</h3>
+			<p><em>If all computers running Bitcoin were turned off, but the protocol and records still existed, would Bitcoin still exist?</em></p>
+			<p>Our class clarified that this scenario means all nodes and users are unable to access the network, with no new transactions and no new blocks. Adit argued that Bitcoin would effectively not exist in any meaningful way, especially over time, because it could not be used and cryptographic verification is practically impossible without computers. Joe pushed back and argued that verification could still be done by hand in principle, just at an extremely slow rate. Under that view, Bitcoin could still exist as a possibility, even if it became non-functional for modern economic use.</p>
+			<p>A major theme in this debate was that trust in Bitcoin depends on fast, reliable computation. Modern computers are what make cryptographic validation, consensus, and transaction finality practical. So while one can argue that Bitcoin may exist conceptually without active machines, a functioning blockchain economy is realistically inseparable from computational infrastructure.</p>
 
-		<h2>Transaction Creation and Signature Flow</h2>
+			<h3>Discussion Question 2</h3>
+			<p><em>If no one recognized Bitcoin as valuable, would Bitcoin still exist, or would it become meaningless data?</em></p>
+			<p>Henry compared Bitcoin to gold. If gold became socially useless or lost market value, it would still exist as a material thing in the world. By analogy, many classmates argued that Bitcoin would still exist as structured ledger data and protocol-defined state even if people stopped valuing it economically. The class consensus was that value and existence are related but not identical: value can collapse while existence remains.</p>
+			<p>My takeaway is that blockchain reveals a layered model of existence. Bitcoin exists technically as cryptographic records, institutionally as a protocol-governed network, and socially as a collectively recognized store and transfer of value. Metaphysics and ontology help explain why something can be real and structured even when it is not physical, and why social recognition can transform ledger entries into economically meaningful ownership.</p>
+		</section>
 
-		<img src="../../img/blockchain/transaction.png"
-			alt="Transaction creation panel where sender, receiver, and transfer amount are configured"
-			style="max-width: 100%; height: auto;">
-
-		<p><strong>Implementation:</strong>
-			Transaction creation allows users to specify sender, receiver, and transfer amount. Transactions are then signed with the
-			sender's private key so the network can verify authenticity. This enforces ownership of funds and prevents unauthorized spends
-			before transactions are accepted into a mined block.
-		</p>
-
-		<h2>Mined Block and Updated UTXO State</h2>
-
-		<img src="../../img/blockchain/newBlock.png"
-			alt="View showing a newly mined block appended to the chain"
-			style="max-width: 100%; height: auto; margin-bottom: 20px;">
-
-		<img src="../../img/blockchain/UTXO.png"
-			alt="UTXO pool view showing updated balances for each node after mining and transactions"
-			style="max-width: 100%; height: auto;">
-
-		<p><strong>Implementation:</strong>
-			Once a valid block is mined, it is appended to the chain and the UTXO pool is recalculated. The miner receives a reward,
-			and all node balances update according to confirmed transactions. This gives a clear visual model of how consensus,
-			incentives, and spendable outputs interact in a UTXO-based blockchain.
-		</p>
-
-		<h2>Reflection on Metaphysics of Cryptocurrency and Blockchain</h2>
-		<h3>What is Metaphysics?</h3>
-		<p>
-			Metaphysics is the philosophical study of the fundamental nature of reality. It asks questions such as:
-			What is true? What is identity? What does it mean for something to exist? Blockchain and cryptocurrency are
-			especially interesting in metaphysics because they challenge our everyday assumptions about ownership,
-			material objects, and social reality.
-		</p>
-
-		<p>
-			Owning cryptocurrency does not mean owning a physical object. There is no coin to hold and no central bank to
-			withdraw from. In practice, a person is considered to own a coin because the blockchain network recognizes ledger
-			records that assign spendable outputs to that person. Ownership is therefore established through cryptographic proof,
-			network consensus, and shared acceptance of protocol rules.
-		</p>
-
-		<h3>Ontology and Existence in Bitcoin</h3>
-		<p>
-			Our second branch of philosophy was <strong>Ontology</strong>, a branch of metaphysics focused specifically on existence.
-			Ontology asks: What makes something a thing rather than nothing? What conditions must be met for something to exist?
-		</p>
-
-		<p>
-			Normally, we think of existence in terms of physical objects. Bitcoin complicates that idea because its state is not
-			physical. Instead, Bitcoin exists as entries in a distributed digital ledger secured by cryptographic proofs.
-			Its existence is both mathematical and social: participants follow the same protocol rules and collectively treat
-			ledger entries as valid ownership and transferable value.
-		</p>
-
-		<h3>Discussion Question 1</h3>
-		<p>
-			<em>If all computers running Bitcoin were turned off, but the protocol and records still existed, would Bitcoin still exist?</em>
-		</p>
-
-		<p>
-			Our class clarified that this scenario means all nodes and users are unable to access the network, with no new
-			transactions and no new blocks. Adit argued that Bitcoin would effectively not exist in any meaningful way,
-			especially over time, because it could not be used and cryptographic verification is practically impossible without
-			computers. Joe pushed back and argued that verification could still be done by hand in principle, just at an
-			extremely slow rate. Under that view, Bitcoin could still exist as a possibility, even if it became non-functional
-			for modern economic use.
-		</p>
-
-		<p>
-			A major theme in this debate was that trust in Bitcoin depends on fast, reliable computation. Modern computers are
-			what make cryptographic validation, consensus, and transaction finality practical. So while one can argue that
-			Bitcoin may exist conceptually without active machines, a functioning blockchain economy is realistically inseparable
-			from computational infrastructure.
-		</p>
-
-		<h3>Discussion Question 2</h3>
-		<p>
-			<em>If no one recognized Bitcoin as valuable, would Bitcoin still exist, or would it become meaningless data?</em>
-		</p>
-
-		<p>
-			Henry compared Bitcoin to gold. If gold became socially useless or lost market value, it would still exist as a
-			material thing in the world. By analogy, many classmates argued that Bitcoin would still exist as structured ledger
-			data and protocol-defined state even if people stopped valuing it economically. The class consensus was that value
-			and existence are related but not identical: value can collapse while existence remains.
-		</p>
-
-		<p>
-			My takeaway is that blockchain reveals a layered model of existence. Bitcoin exists technically as cryptographic
-			records, institutionally as a protocol-governed network, and socially as a collectively recognized store and transfer
-			of value. Metaphysics and ontology help explain why something can be real and structured even when it is not physical,
-			and why social recognition can transform ledger entries into economically meaningful ownership.
-		</p>
-
-		<br>
-		<a href="cs302.html" class="btn">Back to CS302</a>
+		<p class="footer-note"><a href="cs302.html">Back to CS302</a></p>
 	</div>
-
 </body>
 </html>

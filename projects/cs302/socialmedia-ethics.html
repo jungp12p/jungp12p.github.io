@@ -2,141 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Media x Ethics | Paul Jung</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="scheme-page">
+    <div class="page">
+        <nav class="top-nav">
+            <a href="cs302.html">Back to CS302 Projects</a>
+        </nav>
 
-    <div class="container" style="padding: 50px;">
-        <h1>Social Media x Ethics</h1>
-        <p>This project explores the intersection of social media and ethical design through a Bluesky bot, showcasing different types of posts and interactions.</p>
+        <header class="hero">
+            <p class="eyebrow">CS302 Project</p>
+            <h1>Social Media x Ethics</h1>
+            <p class="subtitle">
+                This project examines social bot design through a Bluesky fanpage bot and connects implementation
+                choices to ethical questions about imitation, accountability, and trust in online spaces.
+            </p>
+            <div class="pill-row">
+                <span class="pill">ATProto</span>
+                <span class="pill">Media Uploads</span>
+                <span class="pill">Gemini Integration</span>
+                <span class="pill">Bot Ethics</span>
+            </div>
+        </header>
 
-        <h2>The Anthony Edwards Fanpage Bot</h2>
-        <p>
-            Visit the bot on Bluesky: <a href="https://bsky.app/profile/antmanlover8.bsky.social" target="_blank">@antmanlover8.bsky.social</a>
-        </p>
-        <p><strong>Design Rationale:</strong>
-            I chose to create an Anthony Edwards fanpage because I am a huge fan of his basketball talent. I believe more people should be exposed to his greatness 
-            in the NBA and realize that he isn't too far from becoming the future face of the league. This bot serves as a testament to his skills and potential while 
-            exploring the technical capabilities of social media APIs.
-        </p>
+        <section class="section">
+            <h2>The Anthony Edwards Fanpage Bot</h2>
+            <p>Visit the bot on Bluesky: <a href="https://bsky.app/profile/antmanlover8.bsky.social" target="_blank" rel="noopener noreferrer">@antmanlover8.bsky.social</a></p>
+            <p><strong>Design Rationale:</strong> I chose to create an Anthony Edwards fanpage because I am a huge fan of his basketball talent. I believe more people should be exposed to his greatness in the NBA and realize that he is not too far from becoming the future face of the league. This bot serves as a testament to his skills and potential while exploring the technical capabilities of social media APIs.</p>
+        </section>
 
-        <h2>1. Text-Only Posts</h2>
+        <section class="section">
+            <h2>1. Text-Only Posts</h2>
+            <img
+                src="../../img/socialmedia/replyPost.png"
+                alt="Bluesky post screenshot showing a text-only reply to another user's post about Anthony Edwards, demonstrating basic text interaction on the platform"
+                style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;"
+            >
+            <p><strong>Implementation:</strong> Text-only posts are the most straightforward interaction with Bluesky. The bot uses the ATProto library to send simple text messages directly to the platform. Each post is packaged and communicated with Bluesky's servers to publish immediately. This allows for quick, real-time engagement with the community.</p>
+            <p><strong>Design Choice:</strong> Text-only posts form the foundation of the bot's interactions. By starting with simple text replies, the bot can engage with other users' posts about Anthony Edwards, creating conversational moments and community participation. This approach prioritizes accessibility and authenticity over visual complexity.</p>
+        </section>
 
-        <img src="../../img/socialmedia/replyPost.png"
-            alt="Bluesky post screenshot showing a text-only reply to another user's post about Anthony Edwards, demonstrating basic text interaction on the platform"
-            style="max-width: 100%; height: auto;">
+        <section class="section">
+            <h2>2. Multimedia Posts</h2>
+            <img
+                src="../../img/socialmedia/picturePost.png"
+                alt="Bluesky post screenshot showing an image of Anthony Edwards with accompanying text caption, demonstrating image upload and embedding functionality"
+                style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;"
+            >
+            <p><strong>Implementation:</strong> Multimedia posts handle image uploads by first reading image files as binary data and uploading them as blobs to Bluesky. The bot then embeds these images in posts alongside text captions. This process combines image assets with text to create richer, more visually engaging content that highlights Anthony Edwards' athletic achievements and moments.</p>
+            <p><strong>Design Choice:</strong> Visual content is more engaging and memorable than text alone. By incorporating high-quality images of Anthony Edwards, the bot can showcase his talent more effectively and attract greater attention from basketball fans. Images also make posts more shareable and likely to appear in users' feeds.</p>
+        </section>
 
-        <p><strong>Implementation:</strong>
-            Text-only posts are the most straightforward interaction with Bluesky. The bot uses the ATProto library to send simple text messages directly to the platform. 
-            Each post is packaged and communicated with Bluesky's servers to publish immediately. This allows for quick, real-time engagement with the community.
-        </p>
+        <section class="section">
+            <h2>3. User Interactions and External Packages</h2>
+            <img
+                src="../../img/socialmedia/genaiPost.png"
+                alt="Bluesky post screenshot showing an AI-generated message praising Anthony Edwards, created using Google Gemini API integration"
+                style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5d6be;"
+            >
+            <p><strong>Implementation:</strong> This section showcases the integration of Google Gemini AI (external package) with Bluesky. The bot sends prompts to the Gemini API, which generates creative, AI-crafted messages that praise Anthony Edwards' skills and potential. These AI-generated responses are then posted to Bluesky, combining user interaction triggers with external AI capabilities to create dynamic, personalized content.</p>
+            <p><strong>Design Choice:</strong> Integrating generative AI adds sophistication and uniqueness to the bot's posts. Rather than relying solely on pre-written templates, the AI can generate varied, contextually appropriate messages about Anthony Edwards. This approach raises interesting ethical questions about authenticity and AI-generated content on social media while demonstrating the potential for human-AI collaboration in creative expression.</p>
+        </section>
 
-        <p><strong>Design Choice:</strong>
-            Text-only posts form the foundation of the bot's interactions. By starting with simple text replies, the bot can engage with other users' posts about Anthony Edwards, 
-            creating conversational moments and community participation. This approach prioritizes accessibility and authenticity over visual complexity.
-        </p>
+        <section class="section">
+            <h2>Reflection on Ethics in Social Media Bots</h2>
 
-        <h2>2. Multimedia Posts</h2>
+            <h3>What Makes a Bot Good or Bad?</h3>
+            <p>A big starting point for our class was the question: <em>What makes a bot good or bad?</em> One of the readings that shaped this discussion was <em>Do Social Bots Dream of Electric Sheep? A Categorisation of Social Media Bot Accounts</em>. The paper helped frame bots based on intent: malicious, benign, and neutral.</p>
+            <p>Malicious bots are harmful to users and social platforms. They can spread misinformation, manipulate political conversation, spam communities, steal personal data, and misuse user information. Benign bots are designed to be useful, like daily news bots, weather bots, and customer support helpers. Neutral bots sit in between, where they do not clearly help or harm users.</p>
+            <p>The anthropological side of this issue is important because imitation changes how we judge a bot. If a bot behaves like a human, it becomes harder to detect and classify. It may talk like a person, send requests, and engage with comments in ways that feel natural. Social bots are specifically powerful because they imitate human behavior so closely, and that is also what my bot does through conversational posting and interaction features.</p>
 
-        <img src="../../img/socialmedia/picturePost.png"
-            alt="Bluesky post screenshot showing an image of Anthony Edwards with accompanying text caption, demonstrating image upload and embedding functionality"
-            style="max-width: 100%; height: auto;">
+            <h3>Should We Care About Human-Bot Relations as Much as Human-Human Relations?</h3>
+            <p>Our first class discussion asked whether relations between humans and bots should matter when making ethical judgments, and whether they are as important as human-human relations. My first reaction was that humans are responsible for bot behavior because humans design, deploy, and control bots. For that reason, I think human-bot relationships matter ethically, but they are still grounded in human intention.</p>
+            <p>A classmate, Yahvi, raised a strong example: what if a bot becomes perfectly human-like and causes someone to fall in love with it? In that case, responsibility feels less obvious on the surface. My view is that even a perfectly human-like bot is still a bot, and a human creator remains behind its actions. Because of that, I believe the creator should take full ethical responsibility.</p>
 
-        <p><strong>Implementation:</strong>
-            Multimedia posts handle image uploads by first reading image files as binary data and uploading them as blobs to Bluesky. The bot then embeds these images 
-            in posts alongside text captions. This process combines image assets with text to create richer, more visually engaging content that highlights Anthony Edwards' 
-            athletic achievements and moments.
-        </p>
+            <h3>Would Social Media Be Better Without Bots?</h3>
+            <p>The next discussion question was whether social media would be better without bots. My initial answer was no. Removing bots would not remove the people behind malicious behavior; they would still find ways to spread harm. Also, many platforms rely on automation. Tools in places like Discord, Slack, and chatrooms provide moderation and utility features that can improve user experience.</p>
+            <p>Classmate Henry argued the opposite: social media was originally built for human-to-human connection, and bots can interfere with that design by impersonating humans and reducing trust. I thought this was a strong point. It made me reflect on earlier social media experiences, when interactions felt more clearly human. Today, customer support and platform features are often handled by AI chatbots, which can feel impersonal and frustrating. That shift changes how safe and authentic online spaces feel.</p>
 
-        <p><strong>Design Choice:</strong>
-            Visual content is more engaging and memorable than text alone. By incorporating high-quality images of Anthony Edwards, the bot can showcase his talent more 
-            effectively and attract greater attention from basketball fans. Images also make posts more shareable and likely to appear in users' feeds.
-        </p>
+            <h3>Conclusion</h3>
+            <p>Overall, I now see bot ethics as less about whether bots exist and more about how they are designed, disclosed, and governed. Bots can be useful and creative, but they can also mislead, manipulate, or blur accountability when they imitate humans too closely. My Anthony Edwards fanpage bot is meant to be a positive, transparent example of benign automation: celebrating a player I admire while also showing why creators must take responsibility for the social impact of what their bots say and do.</p>
 
-        <h2>3. User Interactions & External Packages</h2>
+            <p><strong>References:</strong><br>Stieglitz, S., Brachten, F., Ross, B., &amp; Jung, A.-K. (2017). Do social bots dream of electric sheep? A categorisation of social media bot accounts. In Proceedings of the Australasian Conference on Information Systems (ACIS 2017), Hobart, Australia.</p>
+        </section>
 
-        <img src="../../img/socialmedia/genaiPost.png"
-            alt="Bluesky post screenshot showing an AI-generated message praising Anthony Edwards, created using Google Gemini API integration"
-            style="max-width: 100%; height: auto;">
-
-        <p><strong>Implementation:</strong>
-            This section showcases the integration of Google Gemini AI (external package) with Bluesky. The bot sends prompts to the Gemini API, which generates creative, 
-            AI-crafted messages that praise Anthony Edwards' skills and potential. These AI-generated responses are then posted to Bluesky, combining user interaction triggers 
-            with external AI capabilities to create dynamic, personalized content.
-        </p>
-
-        <p><strong>Design Choice:</strong>
-            Integrating generative AI adds sophistication and uniqueness to the bot's posts. Rather than relying solely on pre-written templates, the AI can generate varied, 
-            contextually appropriate messages about Anthony Edwards. This approach raises interesting ethical questions about authenticity and AI-generated content on social 
-            media while demonstrating the potential for human-AI collaboration in creative expression.
-        </p>
-
-        <h2>Reflection on Ethics in Social Media Bots</h2>
-        <h3>What Makes a Bot Good or Bad?</h3>
-        <p>
-            A big starting point for our class was the question: <em>What makes a bot good or bad?</em> One of the readings that shaped this discussion was 
-            <em>Do Social Bots Dream of Electric Sheep? A Categorisation of Social Media Bot Accounts</em>. The paper helped frame bots based on intent: malicious, 
-            benign, and neutral.
-        </p>
-
-        <p>
-            Malicious bots are harmful to users and social platforms. They can spread misinformation, manipulate political conversation, spam communities, steal 
-            personal data, and misuse user information. Benign bots are designed to be useful, like daily news bots, weather bots, and customer support helpers. 
-            Neutral bots sit in between, where they do not clearly help or harm users.
-        </p>
-
-        <p>
-            The anthropological side of this issue is important because imitation changes how we judge a bot. If a bot behaves like a human, it becomes harder to 
-            detect and classify. It may talk like a person, send requests, and engage with comments in ways that feel natural. Social bots are specifically powerful 
-            because they imitate human behavior so closely, and that is also what my bot does through conversational posting and interaction features.
-        </p>
-
-        <h3>Should We Care About Human-Bot Relations as Much as Human-Human Relations?</h3>
-        <p>
-            Our first class discussion asked whether relations between humans and bots should matter when making ethical judgments, and whether they are as important 
-            as human-human relations. My first reaction was that humans are responsible for bot behavior because humans design, deploy, and control bots. For that reason, 
-            I think human-bot relationships matter ethically, but they are still grounded in human intention.
-        </p>
-
-        <p>
-            A classmate, Yahvi, raised a strong example: what if a bot becomes perfectly human-like and causes someone to fall in love with it? In that case, responsibility 
-            feels less obvious on the surface. My view is that even a perfectly human-like bot is still a bot, and a human creator remains behind its actions. Because of that, 
-            I believe the creator should take full ethical responsibility.
-        </p>
-
-        <h3>Would Social Media Be Better Without Bots?</h3>
-        <p>
-            The next discussion question was whether social media would be better without bots. My initial answer was no. Removing bots would not remove the people 
-            behind malicious behavior; they would still find ways to spread harm. Also, many platforms rely on automation. Tools in places like Discord, Slack, and chatrooms 
-            provide moderation and utility features that can improve user experience.
-        </p>
-
-        <p>
-            Classmate Henry argued the opposite: social media was originally built for human-to-human connection, and bots can interfere with that design by impersonating 
-            humans and reducing trust. I thought this was a strong point. It made me reflect on earlier social media experiences, when interactions felt more clearly human. 
-            Today, customer support and platform features are often handled by AI chatbots, which can feel impersonal and frustrating. That shift changes how safe and authentic 
-            online spaces feel.
-        </p>
-
-        <h3>Conclusion</h3>
-        <p>
-            Overall, I now see bot ethics as less about whether bots exist and more about how they are designed, disclosed, and governed. Bots can be useful and creative, 
-            but they can also mislead, manipulate, or blur accountability when they imitate humans too closely. My Anthony Edwards fanpage bot is meant to be a positive, 
-            transparent example of benign automation: celebrating a player I admire while also showing why creators must take responsibility for the social impact of what 
-            their bots say and do.
-        </p>
-
-        <p style="font-size: 1; color: #555; margin-top: 40px;">
-            References:<br>
-            Stieglitz, S., Brachten, F., Ross, B., & Jung, A.-K. (2017). Do social bots dream of electric sheep? A categorisation of social media bot accounts. 
-            In Proceedings of the Australasian Conference on Information Systems (ACIS 2017), Hobart, Australia.
-        </p>
-        
-
-        <br>
-        <a href="cs302.html" class="btn">Back to CS302</a>
+        <p class="footer-note"><a href="cs302.html">Back to CS302</a></p>
     </div>
-
 </body>
 </html>
