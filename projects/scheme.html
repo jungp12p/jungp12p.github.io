@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheme Interpreter | Paul Jung</title>
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="scheme-page">
+    <div class="page">
+        <nav class="top-nav">
+            <a href="projects/projects.html">Back to Projects</a>
+        </nav>
+
+        <header class="hero">
+            <p class="eyebrow">CS Programming Languages Project</p>
+            <h1>Scheme Interpreter in C: from Parentheses to Closures</h1>
+            <p class="subtitle">
+                This project builds a full interpreter pipeline in C: lexical analysis, parsing, evaluation, and printing.
+                It also highlights one of the most important systems topics in C: explicit memory control, handled here with a custom allocator tracker in <code>talloc.c</code>.
+            </p>
+            <div class="pill-row">
+                <span class="pill">Tokenizer</span>
+                <span class="pill">Parser</span>
+                <span class="pill">AST Evaluator</span>
+                <span class="pill">Lexical Scoping</span>
+                <span class="pill">Closures</span>
+                <span class="pill">Custom GC-Style Cleanup</span>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2>Background: Why Scheme, Why Interpreters, Why C?</h2>
+            <p>
+                Scheme is a minimalist Lisp dialect created by Gerald Jay Sussman and Guy L. Steele Jr. in the 1970s.
+                It is used in programming languages courses because its syntax is compact and consistent, which makes the semantics easier to study.
+                In an interpreter project, that means you can spend your energy on deep language concepts: syntax trees, environments, function application, and evaluation strategy.
+            </p>
+            <p>
+                Implementing this in C makes the learning sharper. C gives direct control over data representation and memory, but with that control comes responsibility.
+                The project therefore pairs language implementation with memory discipline by routing allocations through <code>talloc</code>, then cleaning everything through <code>tfree</code> and <code>texit</code>.
+            </p>
+            <p>
+                This implementation follows a classic metacircular-style interpreter architecture in a low-level language. The source code demonstrates how high-level language ideas
+                can be reduced to a small set of low-level mechanisms: tagged unions, linked structures, environment chains, recursive descent over expression trees, and controlled memory lifetimes.
+            </p>
+        </section>
+
+        <section class="section" id="pipeline">
+            <h2>Evaluation Pipeline</h2>
+            <div class="grid">
+                <article class="card">
+                    <h3>1) Tokenizer</h3>
+                    <p>Reads characters from input and emits token objects: numbers, symbols, booleans, strings, quotes, and parentheses.</p>
+                </article>
+                <article class="card">
+                    <h3>2) Parser</h3>
+                    <p>Transforms the token stream into a nested AST using lists and quote wrapping logic.</p>
+                </article>
+                <article class="card">
+                    <h3>3) Interpreter</h3>
+                    <p>Evaluates expressions with lexical scope, special forms, primitive operations, and closures.</p>
+                </article>
+                <article class="card">
+                    <h3>4) Print</h3>
+                    <p>Prints each non-void result in Scheme-readable form, preserving list structure and values.</p>
+                </article>
+            </div>
+
+            <div class="path">
+                <strong>Input -> Tokenize -> Parse -> Eval -> Output</strong>
+            </div>
+
+            <pre><code>(define x 10)
+(define y 5)
+(+ x y)
+(if #t 42 0)
+
+; output
+15
+42</code></pre>
+        </section>
+
+        <section class="section">
+            <h2>Project File Map</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Role in the System</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>main.c</code></td>
+                        <td>Runs the read -> parse -> eval sequence and calls final cleanup.</td>
+                    </tr>
+                    <tr>
+                        <td><code>tokenizer.c</code></td>
+                        <td>Lexical scanner for Scheme tokens including quote and booleans.</td>
+                    </tr>
+                    <tr>
+                        <td><code>parser.c</code></td>
+                        <td>Builds parse tree with nested lists and quote desugaring.</td>
+                    </tr>
+                    <tr>
+                        <td><code>interpreter.c</code></td>
+                        <td>Implements environment model, special forms, primitive bindings, apply, and eval.</td>
+                    </tr>
+                    <tr>
+                        <td><code>linkedlist.c</code></td>
+                        <td>Core list representation and helpers like <code>cons</code>, <code>car</code>, <code>cdr</code>, <code>reverse</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>talloc.c</code></td>
+                        <td>Global allocation tracker used to avoid leaks across interpreter execution.</td>
+                    </tr>
+                    <tr>
+                        <td><code>schemeval.h</code></td>
+                        <td>Defines tagged-value representation and frame structure for environments.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section" id="concepts">
+            <h2>Data Structures and Computational Concepts</h2>
+
+            <h3>1) Tagged union runtime values</h3>
+            <p>
+                The interpreter uses a single runtime object type (<code>SchemeVal</code>) with a type tag and a C union.
+                This is a standard implementation pattern in dynamic language runtimes: one container type can represent numbers,
+                symbols, strings, booleans, cons cells, closures, primitive function pointers, and control values like <code>VOID_TYPE</code>.
+            </p>
+
+            <h3>2) Lists and trees</h3>
+            <p>
+                In Scheme, code and data share list structure. Internally, parse trees are represented with cons cells rather than a separate AST node class hierarchy.
+                That means expression trees are effectively list-based trees. The parser uses a stack of tokens and subtrees while tracking parenthesis depth,
+                then constructs nested list structure when it encounters a close parenthesis.
+            </p>
+            <p>
+                This is a key Lisp idea: homoiconicity. The same pair/list data structure can represent both program source and runtime data.
+                In this project, quoted forms reinforce that idea because <code>'expr</code> is rewritten to <code>(quote expr)</code> before evaluation.
+            </p>
+
+            <h3>3) Environments as linked frame chains</h3>
+            <p>
+                Lexical scope is implemented with <code>Frame</code> objects. A frame stores local bindings and a pointer to a parent frame.
+                Symbol lookup walks parent pointers outward until it finds a matching name. This gives static-scope behavior at runtime.
+            </p>
+
+            <h3>4) Closures and lambda calculus ideas</h3>
+            <p>
+                A lambda expression produces a closure object containing parameter names, function body, and the environment where the lambda was created.
+                During application, a new frame is created whose parent is the closure's defining frame. That capture step is exactly what makes closures meaningful.
+                Conceptually, this mirrors lambda calculus substitution, but implemented through environments and pointers.
+            </p>
+
+            <h3>5) Evaluation strategy</h3>
+            <p>
+                Function application is eager (applicative order): arguments are evaluated first with <code>evalEach</code>, then passed to <code>apply</code>.
+                Special forms such as <code>if</code>, <code>let</code>, <code>define</code>, <code>lambda</code>, and <code>quote</code> have custom evaluation rules.
+                This separation between ordinary application and special-form dispatch is central to interpreter design.
+            </p>
+
+            <h3>6) Higher-order programming</h3>
+            <p>
+                The primitive <code>map</code> shows higher-order behavior: functions are values, can be passed as arguments, and can be applied element-wise to lists.
+                Combined with closures, this supports functional programming style with lexical capture.
+            </p>
+
+            <h3>7) Error discipline and arity checking</h3>
+            <p>
+                Many interpreter branches enforce structural invariants and arity constraints. Invalid expression shape, type mismatches, duplicate names,
+                or wrong argument counts trigger <code>evaluationError</code> or syntax errors. This provides a defensive runtime boundary in a language without static typing.
+            </p>
+        </section>
+
+        <section class="section" id="functions">
+            <h2>How the Core Functions Work</h2>
+
+            <h3>Tokenizer functions</h3>
+            <ul>
+                <li><strong>checkInitial</strong> and <strong>checkSubsequent</strong> encode valid symbol rules (Dybvig-style lexical constraints).</li>
+                <li><strong>checkNumber</strong> identifies numeric digits while parsing integer and double tokens.</li>
+                <li><strong>tokenize</strong> scans stdin, skipping whitespace/comments and constructing token lists.</li>
+                <li><strong>displayTokens</strong> is useful for lexical debugging and token inspection.</li>
+            </ul>
+
+            <h3>Parser functions</h3>
+            <ul>
+                <li><strong>addToParseTree</strong> handles open/close parentheses and subtree construction.</li>
+                <li><strong>wrapAllQuotes</strong> rewrites quote shorthand so <code>'x</code> becomes <code>(quote x)</code>.</li>
+                <li><strong>parse</strong> validates balanced structure and returns a complete AST list.</li>
+                <li><strong>printTree</strong> prints tree forms back as readable Scheme syntax.</li>
+            </ul>
+
+            <h3>Interpreter functions</h3>
+            <ul>
+                <li><strong>lookUpSymbol</strong> walks frame parents to implement lexical lookup.</li>
+                <li><strong>eval</strong> is the central dispatcher over value tags and expression forms.</li>
+                <li><strong>evalIf, evalDefine, evalLambda, evalLet</strong> implement special forms and argument validation.</li>
+                <li><strong>apply</strong> handles both primitive function pointers and closure invocation.</li>
+                <li><strong>evalEach</strong> evaluates argument lists before application.</li>
+                <li><strong>bind</strong> installs primitive procedures in the global frame.</li>
+                <li><strong>primitiveAdd, primitiveCar, primitiveCdr, primitiveCons, primitiveMap, primitiveNull</strong> provide baseline Scheme functionality.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="memory">
+            <h2>Memory Management Spotlight: talloc as Safe Global Cleanup</h2>
+            <p>
+                In plain C, unmanaged <code>malloc</code>/<code>free</code> across many code paths can become error-prone.
+                This interpreter centralizes memory tracking with a custom mechanism:
+            </p>
+            <ol>
+                <li><strong>talloc(size)</strong> allocates memory and records the returned pointer inside a global linked list of active allocations.</li>
+                <li><strong>tfree()</strong> walks that list, freeing each stored pointer and then freeing tracking nodes.</li>
+                <li><strong>texit(status)</strong> guarantees cleanup on fatal syntax/evaluation exits before process termination.</li>
+            </ol>
+            <p>
+                This is not a tracing garbage collector in the runtime-language sense, but it provides a project-level garbage-collection style safety net:
+                all allocations made through <code>talloc</code> are reclaimed at once, preventing forgotten frees during parser/interpreter errors.
+            </p>
+            <p>
+                Compared to tracing garbage collection (such as mark-and-sweep), this approach does not discover live vs unreachable objects during execution.
+                Instead, it records all allocations and frees them as a group at shutdown or error exit. So the model is deterministic bulk cleanup,
+                not incremental runtime tracing.
+            </p>
+            <pre><code>void *talloc(size_t size) {
+    void *memory = malloc(size);
+    ActiveList *node = malloc(sizeof(ActiveList));
+    node->pointer = memory;
+    node->next = ActiveListHead;
+    ActiveListHead = node;
+    return memory;
+}</code></pre>
+        </section>
+
+        <section class="section">
+            <h2>Concept Coverage: Implemented vs Not Yet</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Status in This Repo</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lambda and closures</td>
+                        <td>Implemented</td>
+                        <td><code>evalLambda</code> creates closures capturing defining frames; <code>apply</code> instantiates call frames.</td>
+                    </tr>
+                    <tr>
+                        <td>Tree-based expression evaluation</td>
+                        <td>Implemented</td>
+                        <td>Expressions are list trees built by parser and traversed recursively by <code>eval</code>.</td>
+                    </tr>
+                    <tr>
+                        <td>Higher-order functions</td>
+                        <td>Implemented</td>
+                        <td><code>map</code> accepts function arguments and applies them across list elements.</td>
+                    </tr>
+                    <tr>
+                        <td>Currying</td>
+                        <td>Partially expressible</td>
+                        <td>No automatic currying transform, but nested lambdas can encode curried behavior manually.</td>
+                    </tr>
+                    <tr>
+                        <td>Vectors</td>
+                        <td>Not implemented</td>
+                        <td>No vector token forms or vector runtime type in current object tags.</td>
+                    </tr>
+                    <tr>
+                        <td>Tracing garbage collection</td>
+                        <td>Not implemented</td>
+                        <td>Uses allocation tracking + bulk free, not mark/sweep or generational tracing.</td>
+                    </tr>
+                    <tr>
+                        <td>Tail-call optimization</td>
+                        <td>Not evident</td>
+                        <td>Recursive eval/apply structure does not show explicit tail-call elimination.</td>
+                    </tr>
+                    <tr>
+                        <td>Macros and continuations</td>
+                        <td>Not implemented</td>
+                        <td>No forms like <code>define-syntax</code> or continuation operators in primitive/special-form dispatch.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Data Representation and Lexical Scope</h2>
+            <p>
+                <code>SchemeVal</code> is a tagged union carrying integers, doubles, booleans, symbols, strings, cons cells,
+                closures, and primitive function pointers. This design makes every runtime value explicit and inspectable.
+            </p>
+            <p>
+                <code>Frame</code> values form an environment chain. Every frame has a list of bindings and a parent pointer.
+                When a lambda is created, the closure stores the environment it was defined in. During function application,
+                parameters bind to arguments in a new frame whose parent is the closure's defining frame.
+                That is lexical scoping in action.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type Tag</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>INT_TYPE</code></td><td>Integer values</td></tr>
+                    <tr><td><code>DOUBLE_TYPE</code></td><td>Floating-point values</td></tr>
+                    <tr><td><code>STR_TYPE</code></td><td>String literals and textual data</td></tr>
+                    <tr><td><code>BOOL_TYPE</code></td><td><code>#t</code> and <code>#f</code></td></tr>
+                    <tr><td><code>SYMBOL_TYPE</code></td><td>Identifiers and variable names</td></tr>
+                    <tr><td><code>CONS_TYPE</code></td><td>Pairs and lists</td></tr>
+                    <tr><td><code>CLOSURE_TYPE</code></td><td>User-defined lambdas with captured environment</td></tr>
+                    <tr><td><code>PRIMITIVE_TYPE</code></td><td>Built-in C functions exposed as Scheme procedures</td></tr>
+                    <tr><td><code>VOID_TYPE</code></td><td>No printed value for forms like define</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Step-by-Step Example Through the Interpreter</h2>
+            <pre><code>(define square (lambda (x) (* x x)))
+(square 4)</code></pre>
+            <ul>
+                <li>Tokenizer emits symbols, parentheses, and numbers.</li>
+                <li>Parser constructs nested list forms, preserving expression order.</li>
+                <li><code>define</code> binds <code>square</code> to a closure from <code>lambda</code>.</li>
+                <li>On <code>(square 4)</code>, <code>apply</code> creates a frame where <code>x</code> is bound to <code>4</code>.</li>
+                <li>The body is evaluated in that frame and returns <code>16</code>.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Build and Run</h2>
+            <pre><code>gcc -o scheme main.c tokenizer.c parser.c interpreter.c linkedlist.c talloc.c
+
+            # interactive
+            ./scheme
+
+            # run a script
+            ./scheme &lt; test.scm
+
+            # quick one-liner
+            echo "(+ 1 2 3)" | ./scheme</code></pre>
+        </section>
+
+        <p class="footer-note">Developed by Paul Jung, Carleton College. This page documents the implementation and concepts behind the Scheme interpreter project.</p>
+    </div>
+</body>
+</html>
